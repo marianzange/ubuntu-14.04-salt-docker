@@ -1,6 +1,7 @@
 FROM ubuntu:14.04
 MAINTAINER Marian Zange <marian@crashpad.io>
 
-RUN apt-get update && apt-get install -y curl
-RUN curl -o install_salt.sh -L https://bootstrap.saltstack.com
-RUN sh install_salt.sh -P git v2015.8.0rc5; exit 0
+RUN apt-get update && apt-get install -y wget
+RUN wget -O - https://repo.saltstack.com/apt/ubuntu/ubuntu14/SALTSTACK-GPG-KEY.pub | apt-key add -
+RUN deb http://repo.saltstack.com/apt/ubuntu/ubuntu14 trusty main
+RUN apt-get update && apt-get install salt-minion
